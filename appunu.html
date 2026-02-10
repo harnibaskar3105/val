@@ -163,8 +163,6 @@ h1 { font-family:'Sacramento',cursive; font-size:30px; color:#0077cc; }
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
- document.addEventListener("DOMContentLoaded", () => {
-  // Your entire JS code goes here
   const heartsContainer = document.getElementById("hearts");
   for(let i=0;i<35;i++){
     const h = document.createElement("div");
@@ -179,23 +177,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const runaway = document.getElementById("runaway");
-  let hoverCount=0;
+  let hoverCount = 0;
   const messageThresholds=[
     {min:5,max:14,text:"Yen No solra🥺"},
     {min:15,max:24,text:"Nejamava? 😲"},
     {min:25,max:34,text:"Yes kuden 🥹"},
     {min:35,max:45,text:"Unnala no kuduka mudiyadhee 😈"}
   ];
-  runaway.addEventListener("mouseenter",()=>{
+
+  runaway.addEventListener("mouseenter", ()=>{
     hoverCount++;
     let msg="No 😒";
     if(hoverCount>=5){
       const threshold = messageThresholds.find(t=>hoverCount>=t.min && hoverCount<=t.max);
-      if(threshold) msg=threshold.text;
-      else if(hoverCount>45) msg=messageThresholds[(hoverCount-46)%messageThresholds.length].text;
+      if(threshold) msg = threshold.text;
+      else if(hoverCount>45) msg = messageThresholds[(hoverCount-46)%messageThresholds.length].text;
     }
     runaway.textContent = msg;
-    runaway.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*120-60}px)`;
+    runaway.style.transform = `translate(${Math.random()*120-60}px, ${Math.random()*120-60}px)`;
   });
 
   // Show gift section
