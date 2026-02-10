@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You 💙</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0; font-family:Arial,sans-serif; background:#dff4ff; overflow-x:hidden;
+}
+.hearts { position: fixed; inset:0; z-index:0; pointer-events:none; }
+.heart {
+  position: absolute;
+  font-size: 22px;
+  color: rgba(0, 140, 255, 0.35);
+  animation: floatSmooth linear infinite;
+}
+@keyframes floatSmooth {
+  0% { transform: translateY(0) translateX(0); opacity: 1; }
+  50% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
+  100% { transform: translateY(0) translateX(0); opacity: 1; }
+}
+.section { min-height:100vh; display:flex; justify-content:center; align-items:center; position:relative; z-index:1; }
+.card { background:linear-gradient(240deg,white,#e6f5ff); padding:80px; border-radius:28px; box-shadow:0 30px 60px rgba(0,0,0,0.18),0 10px 25px rgba(0,140,255,0.25); text-align:center; width:520px; max-width:90%; }
+.card img {width: 150px;margin-bottom: 20px;}
+h1 { font-family:'Sacramento',cursive; font-size:35px; color:#0077cc; }
+.scroll-text { margin-top:40px; font-size:24px; color:#0077cc; opacity:0.7; animation:bounce 1.8s infinite; font-family:'Sacramento',cursive;}
+@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
+.btn {
+  margin-top: 35px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #0077cc, #4db8ff); /* smoother blue gradient */
+  color: white;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 6px 12px rgba(0, 103, 179, 0.4), 0 3px 6px rgba(0, 103, 179, 0.2);
+  transition: all 0.3s ease;
+  font-family:'Dancing Script',cursive;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 103, 179, 0.5), 0 5px 10px rgba(0, 103, 179, 0.3);
+  background: linear-gradient(135deg, #005a99, #3399ff); /* slightly darker on hover */
+}
+
+.btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 103, 179, 0.4), 0 3px 6px rgba(0, 103, 179, 0.2);
+}
+.button-container{ display:flex; justify-content:center; gap:20px; margin-top:40px; flex-wrap:wrap;}
+.gift-wrapper{position:relative;width:160px;height:220px;margin:30px auto 0;}
+.box{width:160px;height:120px;background:#ffd84d;position:absolute;bottom:0;border-radius:0 0 14px 14px;}
+.box-ribbon-vertical{width:18px;height:120px;background:#e91e63;position:absolute;left:50%;transform:translateX(-50%);}
+.box-ribbon-horizontal{width:160px;height:18px;background:#e91e63;position:absolute;top:52px;}
+.lid{width:160px;height:44px;background:#ffd84d;position:absolute;bottom:120px;border-radius:14px 14px 6px 6px;transition:transform 0.6s; cursor:pointer;}
+.lid::before{content:"";position:absolute;left:50%;transform:translateX(-50%);width:18px;height:100%;background:#e91e63;}
+.bow{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:52px;height:26px;}
+.bow span{position:absolute;width:26px;height:20px;background:#e91e63;border-radius:65% 65% 40% 40%;}
+.bow span:first-child{left:0;transform:rotate(-20deg);}
+.bow span:nth-child(2){right:0;transform:rotate(20deg);}
+.bow .knot{width:12px;height:12px;background:#c2185b;border-radius:50%;position:absolute;top:8px;left:50%;transform:translateX(-50%);}
+.surprise-btn{position:absolute;top:3px;left:50%;width:140%;transform:translateX(-50%) scale(0.85);opacity:0;transition:opacity 0.5s ease, transform 0.5s ease; pointer-events:none;}
+.surprise-btn.float { animation: floatButton 1.5s infinite ease-in-out; }
+@keyframes floatButton {0%,100%{transform:translateX(-50%) translateY(0) scale(1);}50%{transform:translateX(-50%) translateY(-8px) scale(1);}}
+.open .lid{transform:translateY(-70px);}
+.open .surprise-btn{opacity:1; transform:translateX(-50%) scale(1); pointer-events:auto;}
+.hidden{display:none;}
+
+/* Pop-up for video */
+#finalSection {
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(0.8);
+  background:white; padding:20px; border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  display:none; z-index:10; transition: transform 0.5s ease, opacity 0.5s ease;
+}
+#finalSection.show { display:block; opacity:1; transform:translate(-50%,-50%) scale(1);}
+#finalSection video {
+  width:100%; border-radius:18px; cursor:pointer;
+}
+.video-wrapper {
+  position:relative; display:inline-block; width:100%;
+}
+.video-wrapper .play-btn {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:64px; height:64px;
+  background:rgba(0,0,0,0.6);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  z-index:2;
+}
+.video-wrapper .play-btn::before {
+  content:'▶';
+  color:white; font-size:30px;
+  margin-left:4px;
+}
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="card">
+    <h1>En chella Appunuve😁Varuga Varuga🩷</h1>
+    <div class="scroll-text">Scroll pannu chellamee ↓</div>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="card">
+    <img src="images/shy.png" alt="Cute Image">
+    <h1>Will you be my Valentine? 💕</h1>
+    <div class="button-container">
+      <button class="btn" id="yesBtn">Yes 💕</button>
+      <button class="btn" id="runaway">No 😒</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section hidden" id="giftSection">
+  <div class="card">
+    <h1>Heheeee Jollieeeee, Indha unaku Gift uh💖</h1>
+    <div class="gift-wrapper" id="gift">
+      <div class="lid" id="lid">
+        <div class="bow"><span></span><span></span><span class="knot"></span></div>
+      </div>
+      <div class="box">
+        <div class="box-ribbon-vertical"></div>
+        <div class="box-ribbon-horizontal"></div>
+      </div>
+      <div class="surprise-btn" id="surpriseBtn">
+        <button class="btn" id="openFinal">Open with love🙈💖</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO POP-UP -->
+<div id="finalSection">
+  <div class="video-wrapper">
+    <video id="finalVideo" poster="images/CoverImg.png">
+      <source src="videos/InShot_20260208_183113723.mp4" type="video/mp4">
+    </video>
+    <div class="play-btn" id="videoPlayBtn"></div>
+  </div>
+</div>
+
+<script>
+// Hearts scattered
+const heartsContainer = document.getElementById("hearts");
+for(let i=0;i<35;i++){
+  const h = document.createElement("div");
+  h.className="heart";
+  h.textContent="💙";
+  h.style.top = Math.random()*100+"vh";
+  h.style.left = Math.random()*100+"vw";
+  h.style.fontSize = (14+Math.random()*16)+"px";
+  h.style.animationDuration = (4+Math.random()*6)+"s";
+  h.style.opacity = 0.3 + Math.random()*0.5;
+  heartsContainer.appendChild(h);
+}
+
+// Naughty Button
+const runaway = document.getElementById("runaway");
+let hoverCount=0;
+const messageThresholds=[
+  {min:5,max:14,text:"Yen No solra🥺"},
+  {min:15,max:24,text:"Nejamava? 😲"},
+  {min:25,max:34,text:"Yes kuden 🥹"},
+  {min:35,max:45,text:"Unnala no kuduka mudiyadhee 😈"}
+];
+runaway.addEventListener("mouseenter",()=>{
+  hoverCount++;
+  let msg="No 😒";
+  if(hoverCount>=5){
+    const threshold = messageThresholds.find(t=>hoverCount>=t.min && hoverCount<=t.max);
+    if(threshold) msg=threshold.text;
+    else if(hoverCount>45) msg=messageThresholds[(hoverCount-46)%messageThresholds.length].text;
+  }
+  runaway.textContent = msg;
+  runaway.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*120-60}px)`;
+});
+
+// Show gift section
+document.getElementById("yesBtn").addEventListener("click",()=>{
+  const giftSection=document.getElementById("giftSection");
+  giftSection.classList.remove("hidden");
+  giftSection.scrollIntoView({behavior:"smooth"});
+});
+
+// Lid click
+const lid=document.getElementById("lid");
+const surpriseBtn=document.getElementById("surpriseBtn");
+lid.addEventListener("click",()=>{
+  lid.parentElement.classList.add("open");
+  setTimeout(()=>{
+    surpriseBtn.style.opacity="1";
+    surpriseBtn.style.transform="translateX(-50%) scale(1)";
+    surpriseBtn.style.pointerEvents="auto";
+  },500);
+});
+
+// Open final popup
+const openFinalBtn=document.getElementById("openFinal");
+const finalSection=document.getElementById("finalSection");
+const finalVideo=document.getElementById("finalVideo");
+const videoPlayBtn=document.getElementById("videoPlayBtn");
+
+// Open final popup
+openFinalBtn.addEventListener("click", () => {
+  finalSection.style.display = "block";
+  void finalSection.offsetWidth;
+  finalSection.classList.add("show");
+
+  // Pause video initially and show overlay
+  finalVideo.pause();
+  videoPlayBtn.style.display = "flex";
+});
+
+// Play video on overlay click and go fullscreen
+videoPlayBtn.addEventListener("click", () => {
+  // Hide overlay
+  videoPlayBtn.style.display = "none";
+
+  // Play video
+  finalVideo.play();
+
+  // Request fullscreen
+  if (finalVideo.requestFullscreen) finalVideo.requestFullscreen();
+  else if (finalVideo.webkitRequestFullscreen) finalVideo.webkitRequestFullscreen(); // Safari
+  else if (finalVideo.msRequestFullscreen) finalVideo.msRequestFullscreen(); // IE11
+});
+
+</script>
+</body>
+</html>
