@@ -6,6 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <script>
+  // Read the URL query
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("access");
+
+  // Replace this with your secret token
+  const secretToken = "appunu";
+
+  if (token !== secretToken) {
+    // If token doesn't match, block access
+    document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;'>Access Denied 🚫</h1>";
+    throw new Error("Access Denied");
+  }
+    </script>
 <style>
 body {
   margin:0; font-family:Arial,sans-serif; background:#dff4ff; overflow-x:hidden;
