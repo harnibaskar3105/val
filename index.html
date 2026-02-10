@@ -244,6 +244,18 @@ videoPlayBtn.addEventListener("click", () => {
   else if (finalVideo.webkitRequestFullscreen) finalVideo.webkitRequestFullscreen(); // Safari
   else if (finalVideo.msRequestFullscreen) finalVideo.msRequestFullscreen(); // IE11
 });
+ // Read the URL query
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("access");
+
+  // Replace this with your secret token
+  const secretToken = "appunu";
+
+  if (token !== secretToken) {
+    // If token doesn't match, block access
+    document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;'>Access Denied 🚫</h1>";
+    throw new Error("Access Denied");
+  }
 
 </script>
 </body>
