@@ -223,17 +223,26 @@ runaway.addEventListener("click", () => {
   runaway.style.top = pos.y + "px";
 });
 
-// YES button
 document.getElementById("yesBtn").addEventListener("click", () => {
-  document.getElementById("questionSection").style.display = "none";
+
+  const question = document.getElementById("questionSection");
+  const giftSection = document.getElementById("giftSection");
+
+  // fade out question section
+  question.classList.add("fade-out");
+
+  setTimeout(() => {
+    question.style.display = "none";
+
+    giftSection.classList.remove("hidden");
+    giftSection.classList.add("fade-in");
+
+    giftSection.scrollIntoView({ behavior: "smooth" });
+  }, 500);
 
   runaway.style.display = "none";
-  runaway.style.position = "static";
-
-  const giftSection = document.getElementById("giftSection");
-  giftSection.classList.remove("hidden");
-  giftSection.scrollIntoView({ behavior: "smooth" });
 });
+
 
 // Gift box
 const lid = document.getElementById("lid");
