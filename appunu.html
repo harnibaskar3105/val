@@ -216,12 +216,14 @@ runaway.addEventListener("click", (e) => {
 });
 
 // Show gift section
-document.getElementById("yesBtn").addEventListener("click",()=>{
-  const giftSection=document.getElementById("giftSection");
+document.getElementById("yesBtn").addEventListener("click", () => {
+  const giftSection = document.getElementById("giftSection");
   giftSection.classList.remove("hidden");
-  giftSection.scrollIntoView({behavior:"smooth"});
-});
+  giftSection.scrollIntoView({ behavior: "smooth" });
 
+  // 🔥 HIDE THE NAUGHTY BUTTON
+  document.getElementById("runaway").style.display = "none";
+});
 // Lid click
 const lid=document.getElementById("lid");
 const surpriseBtn=document.getElementById("surpriseBtn");
