@@ -185,15 +185,20 @@ const messageThresholds = [
 
 // Function to get random position within viewport
 function getRandomPosition(button) {
+  const padding = 20; // keeps inside screen
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   const rect = button.getBoundingClientRect();
-  const maxX = vw - rect.width;
-  const maxY = vh - rect.height;
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-  return {x, y};
+
+  const maxX = vw - rect.width - padding;
+  const maxY = vh - rect.height - padding;
+
+  const x = Math.random() * maxX + padding;
+  const y = Math.random() * maxY + padding;
+
+  return { x, y };
 }
+
 
 // Move button on click
 runaway.addEventListener("click", (e) => {
@@ -225,6 +230,8 @@ document.getElementById("yesBtn").addEventListener("click", () => {
   const giftSection = document.getElementById("giftSection");
   giftSection.classList.remove("hidden");
   giftSection.scrollIntoView({ behavior: "smooth" });
+  runaway.style.display = "none";
+
 
 )};
 // Lid click
@@ -268,12 +275,6 @@ videoPlayBtn.addEventListener("click", () => {
   if (finalVideo.requestFullscreen) finalVideo.requestFullscreen();
   else if (finalVideo.webkitRequestFullscreen) finalVideo.webkitRequestFullscreen(); // Safari
   else if (finalVideo.msRequestFullscreen) finalVideo.msRequestFullscreen(); // IE11
-});
-
-// Play video on overlay click
-videoPlayBtn.addEventListener("click",()=>{
-  finalVideo.play();
-  videoPlayBtn.style.display="none";
 });
 
 // Also allow clicking video itself to fullscreen
