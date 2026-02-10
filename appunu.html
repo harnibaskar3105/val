@@ -71,7 +71,29 @@ h1 { font-family:'Sacramento',cursive; font-size:40px; color:#0077cc; }
 @keyframes floatButton {0%,100%{transform:translateX(-50%) translateY(0) scale(1);}50%{transform:translateX(-50%) translateY(-8px) scale(1);}}
 .open .lid{transform:translateY(-70px);}
 .open .surprise-btn{opacity:1; transform:translateX(-50%) scale(1); pointer-events:auto;}
-.hidden{display:none;}
+.hidden{display:none;opacity: 0;}
+.fade-out {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: all 0.5s ease;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInMove 0.6s ease forwards;
+}
+
+@keyframes fadeInMove {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* Pop-up for video */
 #finalSection {
@@ -277,6 +299,11 @@ videoPlayBtn.addEventListener("click", () => {
   if (finalVideo.requestFullscreen) finalVideo.requestFullscreen();
   else if (finalVideo.webkitRequestFullscreen) finalVideo.webkitRequestFullscreen();
 });
+
+  window.addEventListener("load", () => {
+  videoPlayBtn.style.display = "none";
+});
+
 </script>
 
 </body>
