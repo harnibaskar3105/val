@@ -6,20 +6,122 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <script>
-  // Immediately stop page if token is wrong
-  (function() {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("access");
-    const secretToken = "appunu";
+ <script>
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("access");
+  const secretToken = "appunu";
 
-    if (token !== secretToken) {
-      // Stop everything and show Access Denied
-      document.write("<h1 style='text-align:center;margin-top:50px;'>Access Denied 🚫</h1>");
-      document.close();  // ensures the rest of the page doesn't continue
-    }
-  })();
+  if (token !== secretToken) {
+    // Full page block
+    document.documentElement.innerHTML = `
+      <head>
+        <title>Access Denied</title>
+        <style>
+          body{
+            margin:0;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            background:#000;
+            color:#fff;
+            font-family:Arial;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Access Denied 🚫</h1>
+      </body>
+    `;
+    throw new Error("Blocked");
+  }
+   // Hearts scattered
+const heartsContainer = document.getElementById("hearts");
+for(let i=0;i<35;i++){
+  const h = document.createElement("div");
+  h.className="heart";
+  h.textContent="💙";
+  h.style.top = Math.random()*100+"vh";
+  h.style.left = Math.random()*100+"vw";
+  h.style.fontSize = (14+Math.random()*16)+"px";
+  h.style.animationDuration = (4+Math.random()*6)+"s";
+  h.style.opacity = 0.3 + Math.random()*0.5;
+  heartsContainer.appendChild(h);
+}
+
+// Naughty Button
+const runaway = document.getElementById("runaway");
+let hoverCount=0;
+const messageThresholds=[
+  {min:5,max:14,text:"Yen No solra🥺"},
+  {min:15,max:24,text:"Nejamava? 😲"},
+  {min:25,max:34,text:"Yes kuden 🥹"},
+  {min:35,max:45,text:"Unnala no kuduka mudiyadhee 😈"}
+];
+runaway.addEventListener("mouseenter",()=>{
+  hoverCount++;
+  let msg="No 😒";
+  if(hoverCount>=5){
+    const threshold = messageThresholds.find(t=>hoverCount>=t.min && hoverCount<=t.max);
+    if(threshold) msg=threshold.text;
+    else if(hoverCount>45) msg=messageThresholds[(hoverCount-46)%messageThresholds.length].text;
+  }
+  runaway.textContent = msg;
+  runaway.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*120-60}px)`;
+});
+
+// Show gift section
+document.getElementById("yesBtn").addEventListener("click",()=>{
+  const giftSection=document.getElementById("giftSection");
+  giftSection.classList.remove("hidden");
+  giftSection.scrollIntoView({behavior:"smooth"});
+});
+
+// Lid click
+const lid=document.getElementById("lid");
+const surpriseBtn=document.getElementById("surpriseBtn");
+lid.addEventListener("click",()=>{
+  lid.parentElement.classList.add("open");
+  setTimeout(()=>{
+    surpriseBtn.style.opacity="1";
+    surpriseBtn.style.transform="translateX(-50%) scale(1)";
+    surpriseBtn.style.pointerEvents="auto";
+  },500);
+});
+
+// Open final popup
+const openFinalBtn=document.getElementById("openFinal");
+const finalSection=document.getElementById("finalSection");
+const finalVideo=document.getElementById("finalVideo");
+const videoPlayBtn=document.getElementById("videoPlayBtn");
+
+// Open final popup
+openFinalBtn.addEventListener("click", () => {
+  finalSection.style.display = "block";
+  void finalSection.offsetWidth;
+  finalSection.classList.add("show");
+
+  // Pause video initially and show overlay
+  finalVideo.pause();
+  videoPlayBtn.style.display = "flex";
+});
+
+// Play video on overlay click and go fullscreen
+videoPlayBtn.addEventListener("click", () => {
+  // Hide overlay
+  videoPlayBtn.style.display = "none";
+
+  // Play video
+  finalVideo.play();
+
+  // Request fullscreen
+  if (finalVideo.requestFullscreen) finalVideo.requestFullscreen();
+  else if (finalVideo.webkitRequestFullscreen) finalVideo.webkitRequestFullscreen(); // Safari
+  else if (finalVideo.msRequestFullscreen) finalVideo.msRequestFullscreen(); // IE11
+});
+
 </script>
+
 <style>
 body {
   margin:0; font-family:Arial,sans-serif; background:#dff4ff; overflow-x:hidden;
@@ -173,92 +275,5 @@ h1 { font-family:'Sacramento',cursive; font-size:30px; color:#0077cc; }
   </div>
 </div>
 
-<script>
-// Hearts scattered
-const heartsContainer = document.getElementById("hearts");
-for(let i=0;i<35;i++){
-  const h = document.createElement("div");
-  h.className="heart";
-  h.textContent="💙";
-  h.style.top = Math.random()*100+"vh";
-  h.style.left = Math.random()*100+"vw";
-  h.style.fontSize = (14+Math.random()*16)+"px";
-  h.style.animationDuration = (4+Math.random()*6)+"s";
-  h.style.opacity = 0.3 + Math.random()*0.5;
-  heartsContainer.appendChild(h);
-}
-
-// Naughty Button
-const runaway = document.getElementById("runaway");
-let hoverCount=0;
-const messageThresholds=[
-  {min:5,max:14,text:"Yen No solra🥺"},
-  {min:15,max:24,text:"Nejamava? 😲"},
-  {min:25,max:34,text:"Yes kuden 🥹"},
-  {min:35,max:45,text:"Unnala no kuduka mudiyadhee 😈"}
-];
-runaway.addEventListener("mouseenter",()=>{
-  hoverCount++;
-  let msg="No 😒";
-  if(hoverCount>=5){
-    const threshold = messageThresholds.find(t=>hoverCount>=t.min && hoverCount<=t.max);
-    if(threshold) msg=threshold.text;
-    else if(hoverCount>45) msg=messageThresholds[(hoverCount-46)%messageThresholds.length].text;
-  }
-  runaway.textContent = msg;
-  runaway.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*120-60}px)`;
-});
-
-// Show gift section
-document.getElementById("yesBtn").addEventListener("click",()=>{
-  const giftSection=document.getElementById("giftSection");
-  giftSection.classList.remove("hidden");
-  giftSection.scrollIntoView({behavior:"smooth"});
-});
-
-// Lid click
-const lid=document.getElementById("lid");
-const surpriseBtn=document.getElementById("surpriseBtn");
-lid.addEventListener("click",()=>{
-  lid.parentElement.classList.add("open");
-  setTimeout(()=>{
-    surpriseBtn.style.opacity="1";
-    surpriseBtn.style.transform="translateX(-50%) scale(1)";
-    surpriseBtn.style.pointerEvents="auto";
-  },500);
-});
-
-// Open final popup
-const openFinalBtn=document.getElementById("openFinal");
-const finalSection=document.getElementById("finalSection");
-const finalVideo=document.getElementById("finalVideo");
-const videoPlayBtn=document.getElementById("videoPlayBtn");
-
-// Open final popup
-openFinalBtn.addEventListener("click", () => {
-  finalSection.style.display = "block";
-  void finalSection.offsetWidth;
-  finalSection.classList.add("show");
-
-  // Pause video initially and show overlay
-  finalVideo.pause();
-  videoPlayBtn.style.display = "flex";
-});
-
-// Play video on overlay click and go fullscreen
-videoPlayBtn.addEventListener("click", () => {
-  // Hide overlay
-  videoPlayBtn.style.display = "none";
-
-  // Play video
-  finalVideo.play();
-
-  // Request fullscreen
-  if (finalVideo.requestFullscreen) finalVideo.requestFullscreen();
-  else if (finalVideo.webkitRequestFullscreen) finalVideo.webkitRequestFullscreen(); // Safari
-  else if (finalVideo.msRequestFullscreen) finalVideo.msRequestFullscreen(); // IE11
-});
-
-</script>
 </body>
 </html>
