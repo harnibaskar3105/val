@@ -195,7 +195,7 @@ const messageThresholds = [
   { min: 35, max: 45, text: "Unnala no kuduka mudiyadhee 😈" }
 ];
 
-// Function to update message based on hoverCount
+// Update button text based on hoverCount
 function updateMessage() {
   let msg = "No 😒";
   if (hoverCount >= 5) {
@@ -209,14 +209,14 @@ function updateMessage() {
   runaway.textContent = msg;
 }
 
-// Move button randomly within viewport
+// Move button randomly in viewport
 function moveButtonRandomly() {
   runaway.style.position = "fixed"; // allow free movement
 
   const btnWidth = runaway.offsetWidth;
   const btnHeight = runaway.offsetHeight;
 
-  const maxX = window.innerWidth - btnWidth - 10;
+  const maxX = window.innerWidth - btnWidth - 10; // leave some padding
   const maxY = window.innerHeight - btnHeight - 10;
 
   const randomX = Math.random() * maxX;
@@ -226,19 +226,12 @@ function moveButtonRandomly() {
   runaway.style.top = randomY + "px";
 }
 
-// Increase count and move button on click
-runaway.addEventListener("click", (e) => {
-  hoverCount++;       // increment count
-  updateMessage();    // update text
-  moveButtonRandomly(); // move to random position
+// Handle click/tap
+runaway.addEventListener("click", () => {
+  hoverCount++;        // increase count
+  updateMessage();     // update text based on thresholds
+  moveButtonRandomly();// move to random position
 });
-
-// Also increase count if hovered (optional)
-runaway.addEventListener("mouseenter", () => {
-  hoverCount++; 
-  updateMessage();
-});
-
 
 // Show gift section
 document.getElementById("yesBtn").addEventListener("click",()=>{
