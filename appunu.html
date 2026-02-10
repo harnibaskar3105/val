@@ -250,22 +250,22 @@ document.getElementById("yesBtn").addEventListener("click", () => {
   const question = document.getElementById("questionSection");
   const giftSection = document.getElementById("giftSection");
 
-  // fade out question section
+  // hide no button permanently
+  runaway.style.display = "none";
+
+  // scroll FIRST
+  giftSection.scrollIntoView({ behavior: "smooth" });
+
+  // fade out question
   question.classList.add("fade-out");
 
+  // reveal gift AFTER scroll starts
   setTimeout(() => {
     question.style.display = "none";
-
     giftSection.classList.remove("hidden");
-    giftSection.classList.add("fade-in");
-
-    giftSection.scrollIntoView({ behavior: "smooth" });
-  }, 500);
-
-  runaway.style.display = "none";
+    giftSection.classList.add("reveal");
+  }, 400);
 });
-
-
 // Gift box
 const lid = document.getElementById("lid");
 const surpriseBtn = document.getElementById("surpriseBtn");
