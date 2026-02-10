@@ -6,9 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-
 <style>
-
 body {
   margin:0; font-family:Arial,sans-serif; background:#dff4ff; overflow-x:hidden;
 }
@@ -33,7 +31,7 @@ h1 { font-family:'Sacramento',cursive; font-size:30px; color:#0077cc; }
 .btn {
   margin-top: 35px;
   padding: 14px 32px;
-  background: linear-gradient(135deg, #0077cc, #4db8ff); /* smoother blue gradient */
+  background: linear-gradient(135deg, #0077cc, #4db8ff);
   color: white;
   border-radius: 30px;
   border: none;
@@ -44,17 +42,12 @@ h1 { font-family:'Sacramento',cursive; font-size:30px; color:#0077cc; }
   transition: all 0.3s ease;
   font-family:'Dancing Script',cursive;
 }
-
 .btn:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 20px rgba(0, 103, 179, 0.5), 0 5px 10px rgba(0, 103, 179, 0.3);
-  background: linear-gradient(135deg, #005a99, #3399ff); /* slightly darker on hover */
+  background: linear-gradient(135deg, #005a99, #3399ff);
 }
-
-.btn:active {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 103, 179, 0.4), 0 3px 6px rgba(0, 103, 179, 0.2);
-}
+.btn:active { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 103, 179, 0.4), 0 3px 6px rgba(0, 103, 179, 0.2); }
 .button-container{ display:flex; justify-content:center; gap:20px; margin-top:40px; flex-wrap:wrap;}
 .gift-wrapper{position:relative;width:160px;height:220px;margin:30px auto 0;}
 .box{width:160px;height:120px;background:#ffd84d;position:absolute;bottom:0;border-radius:0 0 14px 14px;}
@@ -75,41 +68,15 @@ h1 { font-family:'Sacramento',cursive; font-size:30px; color:#0077cc; }
 .hidden{display:none;}
 
 /* Pop-up for video */
-#finalSection {
-  position:fixed;
-  top:50%; left:50%;
-  transform:translate(-50%,-50%) scale(0.8);
-  background:white; padding:20px; border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
-  display:none; z-index:10; transition: transform 0.5s ease, opacity 0.5s ease;
-}
+#finalSection { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.8); background:white; padding:20px; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.3); display:none; z-index:10; transition: transform 0.5s ease, opacity 0.5s ease;}
 #finalSection.show { display:block; opacity:1; transform:translate(-50%,-50%) scale(1);}
-#finalSection video {
-  width:100%; border-radius:18px; cursor:pointer;
-}
-.video-wrapper {
-  position:relative; display:inline-block; width:100%;
-}
-.video-wrapper .play-btn {
-  position:absolute;
-  top:50%; left:50%;
-  transform:translate(-50%,-50%);
-  width:64px; height:64px;
-  background:rgba(0,0,0,0.6);
-  border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer;
-  z-index:2;
-}
-.video-wrapper .play-btn::before {
-  content:'▶';
-  color:white; font-size:30px;
-  margin-left:4px;
-}
+#finalSection video { width:100%; border-radius:18px; cursor:pointer; }
+.video-wrapper { position:relative; display:inline-block; width:100%; }
+.video-wrapper .play-btn { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:64px; height:64px; background:rgba(0,0,0,0.6); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;}
+.video-wrapper .play-btn::before { content:'▶'; color:white; font-size:30px; margin-left:4px;}
 </style>
 </head>
 <body>
-
 
 <div class="hearts" id="hearts"></div>
 
@@ -161,82 +128,93 @@ h1 { font-family:'Sacramento',cursive; font-size:30px; color:#0077cc; }
     <div class="play-btn" id="videoPlayBtn"></div>
   </div>
 </div>
+
 <script>
+/* -------------------- Hearts -------------------- */
 const heartsContainer = document.getElementById("hearts");
-  for(let i=0;i<35;i++){
-    const h = document.createElement("div");
-    h.className="heart";
-    h.textContent="💙";
-    h.style.top = Math.random()*100+"vh";
-    h.style.left = Math.random()*100+"vw";
-    h.style.fontSize = (14+Math.random()*16)+"px";
-    h.style.animationDuration = (4+Math.random()*6)+"s";
-    h.style.opacity = 0.3 + Math.random()*0.5;
-    heartsContainer.appendChild(h);
+for(let i=0;i<35;i++){
+  const h = document.createElement("div");
+  h.className="heart";
+  h.textContent="💙";
+  h.style.top = Math.random()*100+"vh";
+  h.style.left = Math.random()*100+"vw";
+  h.style.fontSize = (14+Math.random()*16)+"px";
+  h.style.animationDuration = (4+Math.random()*6)+"s";
+  h.style.opacity = 0.3 + Math.random()*0.5;
+  heartsContainer.appendChild(h);
+}
+
+/* -------------------- Runaway Button -------------------- */
+const runaway = document.getElementById("runaway");
+let hoverCount = 0;
+const messageThresholds=[
+  {min:5,max:14,text:"Yen No solra🥺"},
+  {min:15,max:24,text:"Nejamava? 😲"},
+  {min:25,max:34,text:"Yes kuden 🥹"},
+  {min:35,max:45,text:"Unnala no kuduka mudiyadhee 😈"}
+];
+
+runaway.addEventListener("mouseenter", ()=>{
+  hoverCount++;
+  let msg="No 😒";
+  if(hoverCount>=5){
+    const threshold = messageThresholds.find(t=>hoverCount>=t.min && hoverCount<=t.max);
+    if(threshold) msg = threshold.text;
+    else if(hoverCount>45) msg = messageThresholds[(hoverCount-46)%messageThresholds.length].text;
   }
+  runaway.textContent = msg;
 
-  const runaway = document.getElementById("runaway");
-  let hoverCount = 0;
-  const messageThresholds=[
-    {min:5,max:14,text:"Yen No solra🥺"},
-    {min:15,max:24,text:"Nejamava? 😲"},
-    {min:25,max:34,text:"Yes kuden 🥹"},
-    {min:35,max:45,text:"Unnala no kuduka mudiyadhee 😈"}
-  ];
+  // Random jump within card boundaries
+  const parent = runaway.parentElement.getBoundingClientRect();
+  const btnWidth = runaway.offsetWidth;
+  const btnHeight = runaway.offsetHeight;
+  const x = Math.random()*(parent.width - btnWidth);
+  const y = Math.random()*(parent.height - btnHeight);
+  runaway.style.position = "absolute";
+  runaway.style.left = x + "px";
+  runaway.style.top = y + "px";
+});
 
-  runaway.addEventListener("mouseenter", ()=>{
-    hoverCount++;
-    let msg="No 😒";
-    if(hoverCount>=5){
-      const threshold = messageThresholds.find(t=>hoverCount>=t.min && hoverCount<=t.max);
-      if(threshold) msg = threshold.text;
-      else if(hoverCount>45) msg = messageThresholds[(hoverCount-46)%messageThresholds.length].text;
-    }
-    runaway.textContent = msg;
-    runaway.style.transform = `translate(${Math.random()*120-60}px, ${Math.random()*120-60}px)`;
-  });
+/* -------------------- Show Gift Section -------------------- */
+const yesBtn = document.getElementById("yesBtn");
+const giftSection = document.getElementById("giftSection");
+yesBtn.addEventListener("click", ()=>{
+  giftSection.classList.remove("hidden");
+  giftSection.scrollIntoView({behavior:"smooth"});
+});
 
-  // Show gift section
-  document.getElementById("yesBtn").addEventListener("click",()=>{
-    const giftSection=document.getElementById("giftSection");
-    giftSection.classList.remove("hidden");
-    giftSection.scrollIntoView({behavior:"smooth"});
-  });
+/* -------------------- Lid click -------------------- */
+const lid = document.getElementById("lid");
+const surpriseBtn = document.getElementById("surpriseBtn");
+lid.addEventListener("click", ()=>{
+  lid.parentElement.classList.add("open");
+  setTimeout(()=>{
+    surpriseBtn.style.opacity="1";
+    surpriseBtn.style.transform="translateX(-50%) scale(1)";
+    surpriseBtn.style.pointerEvents="auto";
+  },500);
+});
 
-  // Lid click
-  const lid=document.getElementById("lid");
-  const surpriseBtn=document.getElementById("surpriseBtn");
-  lid.addEventListener("click",()=>{
-    lid.parentElement.classList.add("open");
-    setTimeout(()=>{
-      surpriseBtn.style.opacity="1";
-      surpriseBtn.style.transform="translateX(-50%) scale(1)";
-      surpriseBtn.style.pointerEvents="auto";
-    },500);
-  });
+/* -------------------- Video Popup -------------------- */
+const openFinalBtn = document.getElementById("openFinal");
+const finalSection = document.getElementById("finalSection");
+const finalVideo = document.getElementById("finalVideo");
+const videoPlayBtn = document.getElementById("videoPlayBtn");
 
-  // Open final popup
-  const openFinalBtn=document.getElementById("openFinal");
-  const finalSection=document.getElementById("finalSection");
-  const finalVideo=document.getElementById("finalVideo");
-  const videoPlayBtn=document.getElementById("videoPlayBtn");
+openFinalBtn.addEventListener("click", ()=>{
+  finalSection.style.display = "block";
+  void finalSection.offsetWidth;
+  finalSection.classList.add("show");
+  finalVideo.pause();
+  videoPlayBtn.style.display = "flex";
+});
 
-  openFinalBtn.addEventListener("click", () => {
-    finalSection.style.display = "block";
-    void finalSection.offsetWidth;
-    finalSection.classList.add("show");
-    finalVideo.pause();
-    videoPlayBtn.style.display = "flex";
-  });
-
-  videoPlayBtn.addEventListener("click", () => {
-    videoPlayBtn.style.display = "none";
-    finalVideo.play();
-    if (finalVideo.requestFullscreen) finalVideo.requestFullscreen();
-    else if (finalVideo.webkitRequestFullscreen) finalVideo.webkitRequestFullscreen(); // Safari
-    else if (finalVideo.msRequestFullscreen) finalVideo.msRequestFullscreen(); // IE11
-  });
-
+videoPlayBtn.addEventListener("click", ()=>{
+  videoPlayBtn.style.display = "none";
+  finalVideo.play();
+  if(finalVideo.requestFullscreen) finalVideo.requestFullscreen();
+  else if(finalVideo.webkitRequestFullscreen) finalVideo.webkitRequestFullscreen();
+  else if(finalVideo.msRequestFullscreen) finalVideo.msRequestFullscreen();
 });
 </script>
 
