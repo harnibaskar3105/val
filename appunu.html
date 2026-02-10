@@ -184,26 +184,39 @@ const messageThresholds = [
   { min: 35, max: 45, text: "Unnala no kuduka mudiyadhee 😈" },
 ];
 
-runaway.addEventListener("mouseenter", () => {
-  hoverCount++;
+// Naughty Button
+const runaway = document.getElementById("runaway");
+let hoverCount = 0;
+
+const messageThresholds = [
+  { min: 5, max: 14, text: "Yen No solra🥺" },
+  { min: 15, max: 24, text: "Nejamava? 😲" },
+  { min: 25, max: 34, text: "Yes kuden 🥹" },
+  { min: 35, max: 45, text: "Unnala no kuduka mudiyadhee 😈" }
+];
+
+// Function to update message based on hoverCount
+function updateMessage() {
   let msg = "No 😒";
   if (hoverCount >= 5) {
     const threshold = messageThresholds.find(
-      (t) => hoverCount >= t.min && hoverCount <= t.max
+      t => hoverCount >= t.min && hoverCount <= t.max
     );
     if (threshold) msg = threshold.text;
     else if (hoverCount > 45)
       msg = messageThresholds[(hoverCount - 46) % messageThresholds.length].text;
   }
   runaway.textContent = msg;
+}
 
-  // Make it fixed so it moves anywhere on the screen
-  runaway.style.position = "fixed";
+// Move button randomly within viewport
+function moveButtonRandomly() {
+  runaway.style.position = "fixed"; // allow free movement
 
-  // Random X and Y inside viewport, minus button size
   const btnWidth = runaway.offsetWidth;
   const btnHeight = runaway.offsetHeight;
-  const maxX = window.innerWidth - btnWidth - 10; // 10px margin
+
+  const maxX = window.innerWidth - btnWidth - 10;
   const maxY = window.innerHeight - btnHeight - 10;
 
   const randomX = Math.random() * maxX;
@@ -211,6 +224,19 @@ runaway.addEventListener("mouseenter", () => {
 
   runaway.style.left = randomX + "px";
   runaway.style.top = randomY + "px";
+}
+
+// Increase count and move button on click
+runaway.addEventListener("click", (e) => {
+  hoverCount++;       // increment count
+  updateMessage();    // update text
+  moveButtonRandomly(); // move to random position
+});
+
+// Also increase count if hovered (optional)
+runaway.addEventListener("mouseenter", () => {
+  hoverCount++; 
+  updateMessage();
 });
 
 
