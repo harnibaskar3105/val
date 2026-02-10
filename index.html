@@ -11,15 +11,15 @@
   const params = new URLSearchParams(window.location.search);
   const token = params.get("access");
 
-  // Replace this with your secret token
+  // Secret token
   const secretToken = "appunu";
 
   if (token !== secretToken) {
-    // If token doesn't match, block access
-    document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;'>Access Denied 🚫</h1>";
-    throw new Error("Access Denied");
+    // If token doesn't match, block access immediately
+    document.write("<h1 style='text-align:center;margin-top:50px;'>Access Denied 🚫</h1>");
+    document.close(); // stop the rest of the page from rendering
   }
-    </script>
+</script>
 <style>
 body {
   margin:0; font-family:Arial,sans-serif; background:#dff4ff; overflow-x:hidden;
