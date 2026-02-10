@@ -120,7 +120,8 @@ h1 { font-family:'Sacramento',cursive; font-size:40px; color:#0077cc; }
 </div>
 
 <!-- SECTION 2 -->
-<div class="section">
+<!-- SECTION 2 -->
+<div class="section" id="questionSection">
   <div class="card">
     <img src="images/shy.png" alt="Cute Image">
     <h1>Will you be my Valentine? 💕</h1>
@@ -216,13 +217,20 @@ runaway.addEventListener("click", (e) => {
 });
 
 // Show gift section
+<script>
 document.getElementById("yesBtn").addEventListener("click", () => {
+
+  // 🔥 HIDE THE WHOLE QUESTION SECTION
+  document.getElementById("questionSection").style.display = "none";
+
+  // SHOW GIFT SECTION
   const giftSection = document.getElementById("giftSection");
   giftSection.classList.remove("hidden");
   giftSection.scrollIntoView({ behavior: "smooth" });
 
-  // 🔥 HIDE THE NAUGHTY BUTTON
-  document.getElementById("runaway").style.display = "none";
+});
+</script>
+
 });
 // Lid click
 const lid=document.getElementById("lid");
