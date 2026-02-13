@@ -369,6 +369,12 @@ h1,
 
 /* hide native controls */
 video::-webkit-media-controls{display:none!important}
+h1 .emoji {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: initial;
+  display: inline;
+}
 
 </style>
 </head>
@@ -380,7 +386,11 @@ video::-webkit-media-controls{display:none!important}
 <!-- SECTION 1 -->
 <div class="section">
   <div class="card">
-    <h1>En chella Appunuve😁 Varuga Varuga💙</h1>
+    <h1>
+  En chella Appunuve<span class="emoji">😁</span> Varuga Varuga
+  <span class="emoji">💙</span>
+</h1>
+
     <div class="scroll-text">Scroll pannu chellamee ↓</div>
   </div>
 </div>
@@ -389,7 +399,11 @@ video::-webkit-media-controls{display:none!important}
 <div class="section" id="questionSection">
   <div class="card">
     <img src="images/shy.png">
-    <h1>Will you be my Valentine? 💙</h1>
+    <h1>
+  Will you be my Valentine?
+  <span class="emoji">💙</span>
+</h1>
+
     <div class="button-container">
       <button class="btn" id="yesBtn">Yes 💙</button>
       <button class="btn" id="runaway">No 😒</button>
@@ -400,7 +414,7 @@ video::-webkit-media-controls{display:none!important}
 <!-- SECTION 3 -->
 <div class="section hidden" id="giftSection">
   <div class="card">
-    <h1>Heheeee Jollieeeee, Indha unaku Gift uh 💙</h1>
+    <h1>Heheeee Jollieeeee, Indha unaku Gift uh <span class="emoji">💙</span></h1>
     <div class="gift-wrapper">
       <div class="lid" id="lid">
         <div class="bow">
@@ -515,10 +529,22 @@ openFinalBtn.addEventListener("click",()=>{
   videoPlayBtn.style.display="flex";
 });
 
-videoPlayBtn.addEventListener("click",()=>{
-  videoPlayBtn.style.display="none";
+videoPlayBtn.addEventListener("click", () => {
+  videoPlayBtn.style.display = "none";
+
+  // Play video
   finalVideo.play();
+
+  // Enable fullscreen
+  if (finalVideo.requestFullscreen) {
+    finalVideo.requestFullscreen();
+  } else if (finalVideo.webkitRequestFullscreen) { // Safari
+    finalVideo.webkitRequestFullscreen();
+  } else if (finalVideo.msRequestFullscreen) { // IE11
+    finalVideo.msRequestFullscreen();
+  }
 });
+
 </script>
 
 </body>
