@@ -376,6 +376,150 @@ h1 .emoji {
   display: inline;
 }
 
+
+/* ================= LETTER CARD BASE ================= */
+
+.letter-card {
+  position: relative;
+  padding: 70px;
+  border-radius: 35px;
+  overflow: hidden;
+
+  background: linear-gradient(
+  135deg,
+  #F8E7A1,
+
+
+  #F8E7A1
+);
+
+
+  box-shadow: 0 25px 50px rgba(0,0,0,.15);
+  border: 2px solid rgba(123,108,255,.2);
+}
+
+.letter-card h1,
+.letter-card h2,
+.letter-card p,
+.letter-card button {
+  position: relative;
+  z-index: 2;
+}
+
+/* Soft animated background */
+@keyframes letterBgFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.letter-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 21px;
+  line-height: 1.9;
+  margin-top: 20px;
+}
+/* Romantic floating background */
+.romantic-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.romantic-bg span {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.8;
+  animation: floatRomantic 6s ease-in-out infinite alternate;
+}
+
+/* Random positions */
+.romantic-bg span:nth-child(1){ top:15%; left:20%; }
+.romantic-bg span:nth-child(2){ top:40%; left:70%; }
+.romantic-bg span:nth-child(3){ top:70%; left:30%; }
+.romantic-bg span:nth-child(4){ top:20%; left:80%; }
+.romantic-bg span:nth-child(5){ top:60%; left:60%; }
+.romantic-bg span:nth-child(6){ top:75%; left:75%; }
+.romantic-bg span:nth-child(7){ top:30%; left:40%; }
+
+@keyframes floatRomantic {
+  from { transform: translateY(0px) scale(1); opacity: .4; }
+  to   { transform: translateY(-15px) scale(1.1); opacity: .7; }
+}
+/* ================= SHINY GOLD GLITTER ================= */
+
+/* ================= FULL PAGE STAR SHIMMER ================= */
+
+.gold-glitter span {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+
+  /* WHITE CRYSTAL CENTER */
+  background: radial-gradient(circle,
+      rgba(255,255,255,1) 30%,
+      rgba(255,255,255,0.9) 50%,
+      rgba(255,255,255,0.6) 65%,
+      transparent 80%
+  );
+
+  clip-path: polygon(
+    50% 0%,
+    62% 35%,
+    100% 50%,
+    62% 65%,
+    50% 100%,
+    38% 65%,
+    0% 50%,
+    38% 35%
+  );
+
+  animation: twinkle 2s infinite ease-in-out alternate;
+
+  /* WHITE SHIMMER GLOW */
+  filter:
+    drop-shadow(0 0 6px white)
+    drop-shadow(0 0 12px rgba(255,255,255,0.9))
+    drop-shadow(0 0 20px rgba(255,255,255,0.7));
+}
+
+
+/* Spread stars across full card */
+
+.gold-glitter span:nth-child(1){ top:5%; left:10%; animation-delay:0s;}
+.gold-glitter span:nth-child(2){ top:12%; left:35%; animation-delay:.3s;}
+.gold-glitter span:nth-child(3){ top:18%; left:70%; animation-delay:.6s;}
+.gold-glitter span:nth-child(4){ top:25%; left:50%; animation-delay:.9s;}
+.gold-glitter span:nth-child(5){ top:30%; left:20%; animation-delay:1.2s;}
+.gold-glitter span:nth-child(6){ top:38%; left:80%; animation-delay:1.5s;}
+.gold-glitter span:nth-child(7){ top:45%; left:60%; animation-delay:.4s;}
+.gold-glitter span:nth-child(8){ top:52%; left:15%; animation-delay:1.1s;}
+.gold-glitter span:nth-child(9){ top:60%; left:40%; animation-delay:.7s;}
+.gold-glitter span:nth-child(10){ top:68%; left:75%; animation-delay:1.6s;}
+.gold-glitter span:nth-child(11){ top:75%; left:30%; animation-delay:.5s;}
+.gold-glitter span:nth-child(12){ top:82%; left:55%; animation-delay:1.4s;}
+.gold-glitter span:nth-child(13){ top:90%; left:20%; animation-delay:.8s;}
+.gold-glitter span:nth-child(14){ top:8%; left:85%; animation-delay:1.3s;}
+.gold-glitter span:nth-child(15){ top:20%; left:5%; animation-delay:.2s;}
+.gold-glitter span:nth-child(16){ top:35%; left:95%; animation-delay:1.7s;}
+.gold-glitter span:nth-child(17){ top:50%; left:85%; animation-delay:.6s;}
+.gold-glitter span:nth-child(18){ top:65%; left:5%; animation-delay:1.1s;}
+.gold-glitter span:nth-child(19){ top:78%; left:90%; animation-delay:.9s;}
+.gold-glitter span:nth-child(20){ top:95%; left:60%; animation-delay:1.8s;}
+
+@keyframes twinkle {
+  from {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1.9);
+    opacity: 1;
+  }
+}
+
+
 </style>
 </head>
 
@@ -411,7 +555,57 @@ h1 .emoji {
   </div>
 </div>
 
-<!-- SECTION 3 -->
+<!-- SECTION 3 - LOVE LETTER -->
+<div class="section hidden" id="letterSection">
+  <div class="card letter-card">
+
+<div class="gold-glitter">
+  <span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span>
+</div>
+
+
+<div class="romantic-bg">
+  <span>💕</span>
+  <span>💜</span>
+  <span>💖</span>
+  <span>✨</span>
+  <span>💙</span>
+  <span>💫</span>
+  <span>💝</span>
+</div>
+
+    <div class="letter-decor"><span class="emoji"><h1>💌 💙 ✨ 💙 💌</h1></span></div>
+     <h1>Heheeee Jollieeeee, You are my Valentine now</h1>
+    <h1>En Chella Appunuvukaaga<span class="emoji">💙</span></h1>
+
+    <p class="letter-text">
+     Happy valentines day en chellamee..... "Enaku ellame ne dhan" ngra phrase 
+ku artham kuduthavan ne. Life la eno thano nu irundhaval eh enamo panni
+ipo life eh nee dhan nu yosika vechita.. En thangamee  I LOVE YOU SOO MUCH therima<span class="emoji">🥹💙</span>.
+Suppose ne enta vandhu yaaru neraya love panuvom, neeyah nanah? nu keta yosikaama nee dhan nu soluven.
+Na la thala kezha ninnu thakkali soru saptaalum un alavuku enala love express panna 
+mudiyadhu chello. Enaku importance eh yaaro kuduthadhu ila... apdi pattavala ne dhan d
+enaku saami nu sonniye... anga complete ha vizhundhen da unkita. Enaku ne podho vera 
+yaarume vena. Ne en koodave iru enaku adhu podho. Sanda ilama life ila aana sandaiye life 
+ha iruka vena, andha maari sila phase nammaku vandhuruku, adhu mato vena, namma jollie ha 
+sanda potutu, jollie ah after fight konjals panitu, naughty business panikinu, pudichadha senjikinu
+vaazhkaiye sandhoshama vaazhalam chellame. Nammaloda first valentines day idhu laa. Indha valentines day 
+ku en chellathukaaga na senjiruka small surprise. Enaku ennamo ne already guess panirupa nu nenaikuren.
+Paravala, unaku yena iruku nu exact ha ipo dhane theriyo, adhu enaku podho
+    </p>
+<h2 style="text-align:right;font-weight:bold;font-family:'Dancing Script',cursive;">Ippadiku undhan Anbudan,<br> Chella Pondati</h2>
+
+    <button class="btn" id="continueToGift">
+      Padichitu amuthu💙
+    </button>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
 <div class="section hidden" id="giftSection">
   <div class="card">
     <h1>Heheeee Jollieeeee, Indha unaku Gift uh <span class="emoji">💙</span></h1>
@@ -505,11 +699,24 @@ runaway.addEventListener("mouseover", () => {
   runaway.style.top = pos.y + "px";
 });
 /* YES */
-document.getElementById("yesBtn").addEventListener("click",()=>{
+document.getElementById("yesBtn").addEventListener("click", () => {
   document.getElementById("questionSection").classList.add("fade-out");
-  document.getElementById("giftSection").classList.remove("hidden");
-  document.getElementById("giftSection").scrollIntoView({behavior:"smooth"});
+
+  setTimeout(() => {
+    document.getElementById("letterSection").classList.remove("hidden");
+    document.getElementById("letterSection").scrollIntoView({ behavior: "smooth" });
+  }, 400);
 });
+
+document.getElementById("continueToGift").addEventListener("click", () => {
+  document.getElementById("letterSection").classList.add("fade-out");
+
+  setTimeout(() => {
+    document.getElementById("giftSection").classList.remove("hidden");
+    document.getElementById("giftSection").scrollIntoView({ behavior: "smooth" });
+  }, 400);
+});
+
 
 /* GIFT */
 const lid=document.getElementById("lid");
